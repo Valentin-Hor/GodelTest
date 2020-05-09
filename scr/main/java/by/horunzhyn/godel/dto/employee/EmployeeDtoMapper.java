@@ -15,22 +15,14 @@ public class EmployeeDtoMapper extends BaseDtoMapper<Employee, EmployeeDto> {
     @Autowired
     private JobTitleDtoMapper jobTitleDtoMapper;
 
-    public Employee mapPersistDtoToEntity(PersistEmployeeDto dto) {
-        if (dto == null) {
-            return null;
-        }
-        Employee entity = createEntity();
-        fillPersistEntity(entity, dto);
-        return entity;
-    }
-
-    private void fillPersistEntity(Employee entity, PersistEmployeeDto dto) {
-        fillEmployeeEntityBaseData(entity, dto);
-    }
-
     @Override
     protected EmployeeDto createDto() {
         return new EmployeeDto();
+    }
+
+    @Override
+    protected Employee createEntity() {
+        return new Employee();
     }
 
     @Override
@@ -44,21 +36,33 @@ public class EmployeeDtoMapper extends BaseDtoMapper<Employee, EmployeeDto> {
     }
 
     @Override
-    protected Employee createEntity() {
-        return new Employee();
-    }
-
-    @Override
     protected void fillEntity(Employee entity, EmployeeDto dto) {
         fillEmployeeEntityBaseData(entity, dto);
         entity.setDepartment(departmentDtoMapper.mapDtoToEntity(dto.getDepartment()));
         entity.setJobTitle(jobTitleDtoMapper.mapDtoToEntity(dto.getJobTitle()));
     }
-
+        //заполним базовые поля
     private void fillEmployeeEntityBaseData(Employee entity, BaseEmployeeDto dto) {
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setGender(dto.getGender());
         entity.setDateOfBirth(dto.getDateOfBirth());
     }
+
+    private void fillPersistEntity(Employee entity, PersistEmployeeDto dto) {
+        fillEmployeeEntityBaseData(entity, dto);
+    }
+
+    public Employee mapPersistDtoToEntity(PersistEmployeeDto dto) {
+        if (dto == null) {
+            return null;
+        }
+        Employee entity = createEntity();
+        fillPersistEntity(entity, dto);
+        return entity;
+    }
+
+
+
+
 }

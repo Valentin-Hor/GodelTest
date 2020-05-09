@@ -30,27 +30,27 @@ public class DepartmentController {
 
         return dtoList;
     }
-        // Getmapping
+
     @GetMapping("/departments/{id}")
     public DepartmentDto get(@PathVariable("id") Long id){
         Department entity = service.findOne(id).orElse(null);
         return dtoMapper.mapEntityToDto(entity);
     }
 
-    @PostMapping("/department")
+    @PostMapping("/departments")
     public DepartmentDto create(@RequestBody DepartmentDto dto){
         Department savedEntity = service.save(dtoMapper.mapDtoToEntity(dto));
         return dtoMapper.mapEntityToDto(savedEntity);
     }
 
-    @PutMapping("/department/{id}")
+    @PutMapping("/departments/{id}")
     public DepartmentDto update(@PathVariable("id") Long id,
                                 @RequestBody DepartmentDto dto){
         Department updatedEntity = service.update(id,dto.getTitle());
         return dtoMapper.mapEntityToDto(updatedEntity);
     }
 
-    @DeleteMapping("/department/{id}")
+    @DeleteMapping("/departments/{id}")
     public void delete(@PathVariable("id") Long id){
         service.delete(id);
     }

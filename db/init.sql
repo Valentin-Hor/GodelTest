@@ -27,7 +27,7 @@ CREATE TABLE employee
     date_of_birth date
 );
 INSERT INTO department(title)
-    VALUES ('Adminictration'),('Manufacture');
+    VALUES ('Administration'),('Manufacture');
 
 INSERT INTO job_title(title)
 VALUES('Director'),('Engineer'),('Secretery'),('Economist'),('Manager'),('Master'),('Worker');

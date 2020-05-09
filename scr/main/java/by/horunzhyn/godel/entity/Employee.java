@@ -4,11 +4,12 @@ import by.horunzhyn.godel.dao.converter.GenderConverter;
 import by.horunzhyn.godel.data.Gender;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "employee")
-public class Employee extends BaseEntity {
+public class Employee extends BaseEntity implements Serializable {
 
     @Column(name="first_name")
     private String firstName;

@@ -14,10 +14,6 @@ public class DepartmentService extends BaseServiceImpl<Department,DepartmentRepo
     @Autowired
     private DepartmentRepository DepartmentRepository;
 
-    @Override
-    protected DepartmentRepository getRepository(){
-        return DepartmentRepository;
-    }
 
     public Department update (Long id, String newTitle) {
         Optional<Department> optional = findOne(id);
@@ -31,5 +27,10 @@ public class DepartmentService extends BaseServiceImpl<Department,DepartmentRepo
         return save(foundDepartment);
     }
 
+
+    @Override
+    protected DepartmentRepository getRepository(){
+        return DepartmentRepository;
+    }
 
 }
