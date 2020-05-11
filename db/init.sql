@@ -41,7 +41,8 @@ INSERT INTO employee(first_name, last_name, department_id, job_title_id, gender,
         ('Dmitry','Usov','1','5','MALE','03-05-1991'),
         ('Yuri','Dubenko','2','6','MALE','07-12-1984'),
         ('Sergey','Platonov','2','7','MALE','14-03-1990'),
-        ('Vasiliy','Korgan','2','7','MALE','21-12-1991');
+        ('Vasiliy','Korgan','2','7','MALE','21-12-1991'),
+        ('Dmitry','Kulik','2','7','MALE','15-04-1970');
 
 -- select employee.first_name,
 --     employee.last_name,
