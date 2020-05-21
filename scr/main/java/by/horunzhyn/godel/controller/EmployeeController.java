@@ -1,5 +1,6 @@
 package by.horunzhyn.godel.controller;
 
+import by.horunzhyn.godel.Exceptions.NoSuchEntityFoundException;
 import by.horunzhyn.godel.dto.employee.EmployeeDto;
 import by.horunzhyn.godel.dto.employee.EmployeeDtoMapper;
 import by.horunzhyn.godel.dto.employee.PersistEmployeeDto;
@@ -38,9 +39,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public EmployeeDto get(@PathVariable("id") Long id) {
+    public EmployeeDto get(@PathVariable("id") Long id) throws NoSuchEntityFoundException {
         logger.info("Show employee by id method started");
-        Employee entity = service.findOne(id).orElse(null);
+        Employee entity = service.findOne(id).orElseThrow(()-> new NoSuchEntityFoundException());
         logger.info("Employee found");
         return dtoMapper.mapEntityToDto(entity);
     }

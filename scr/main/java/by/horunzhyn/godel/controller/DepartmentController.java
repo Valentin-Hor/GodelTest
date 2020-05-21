@@ -1,5 +1,6 @@
 package by.horunzhyn.godel.controller;
 
+import by.horunzhyn.godel.Exceptions.NoSuchEntityFoundException;
 import by.horunzhyn.godel.dto.department.DepartmentDto;
 import by.horunzhyn.godel.dto.department.DepartmentDtoMapper;
 import by.horunzhyn.godel.entity.Department;
@@ -38,10 +39,10 @@ public class DepartmentController {
     }
 
     @GetMapping("/departments/{id}")
-    public DepartmentDto get(@PathVariable("id") Long id){
+    public DepartmentDto get(@PathVariable("id") Long id) throws NoSuchEntityFoundException {
         logger.info("Find department by id method started");
 
-        Department entity = service.findOne(id).orElse(null);
+        Department entity = service.findOne(id).orElseThrow(()->new NoSuchEntityFoundException());
         logger.info("Department found");
         return dtoMapper.mapEntityToDto(entity);
     }

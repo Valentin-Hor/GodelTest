@@ -1,5 +1,6 @@
 package by.horunzhyn.godel.controller;
 
+import by.horunzhyn.godel.Exceptions.NoSuchEntityFoundException;
 import by.horunzhyn.godel.dto.jobtitle.JobTitleDto;
 import by.horunzhyn.godel.dto.jobtitle.JobTitleDtoMapper;
 import by.horunzhyn.godel.entity.JobTitle;
@@ -9,8 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 public class JobTitleController {
@@ -37,9 +40,9 @@ public class JobTitleController {
     }
 
     @GetMapping("/job-titles/{id}")
-    public JobTitleDto get(@PathVariable("id") Long id) {
+    public JobTitleDto get(@PathVariable("id") Long id) throws NoSuchEntityFoundException  {
         logger.info("Find job-title by id method started");
-        JobTitle entity = service.findOne(id).orElse(null);
+        JobTitle entity = service.findOne(id).orElseThrow(()->new NoSuchEntityFoundException());
         logger.info("Job-title found");
         return dtoMapper.mapEntityToDto(entity);
     }
