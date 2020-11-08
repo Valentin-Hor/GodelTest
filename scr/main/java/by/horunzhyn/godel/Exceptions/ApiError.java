@@ -8,7 +8,10 @@ public class ApiError {
     private HttpStatus status;
     private String message;
 
-    ApiError(){};
+    ApiError() {
+    }
+
+    ;
 
     public ApiError(HttpStatus status) {
         this();
@@ -16,15 +19,15 @@ public class ApiError {
     }
 
 
-    public ApiError (HttpStatus status, Throwable ex){
+    public ApiError(HttpStatus status, Throwable ex) {
         this();
-        this.status= status;
+        this.status = status;
         this.message = ex.getLocalizedMessage();
     }
 
-     public ApiError (HttpStatus status, String message, Throwable ex){
+    public ApiError(HttpStatus status, String message, Throwable ex) {
         this();
-        this.status= status;
+        this.status = status;
         this.message = message;
     }
 

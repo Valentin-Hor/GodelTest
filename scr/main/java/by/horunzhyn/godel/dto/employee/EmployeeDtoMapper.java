@@ -41,7 +41,8 @@ public class EmployeeDtoMapper extends BaseDtoMapper<Employee, EmployeeDto> {
         entity.setDepartment(departmentDtoMapper.mapDtoToEntity(dto.getDepartment()));
         entity.setJobTitle(jobTitleDtoMapper.mapDtoToEntity(dto.getJobTitle()));
     }
-        //заполним базовые поля
+
+    //заполним базовые поля
     private void fillEmployeeEntityBaseData(Employee entity, BaseEmployeeDto dto) {
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
@@ -61,8 +62,6 @@ public class EmployeeDtoMapper extends BaseDtoMapper<Employee, EmployeeDto> {
         fillPersistEntity(entity, dto);
         return entity;
     }
-
-
 
 
 }

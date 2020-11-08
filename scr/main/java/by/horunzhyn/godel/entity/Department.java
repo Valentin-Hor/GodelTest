@@ -12,6 +12,13 @@ public class Department extends BaseEntity implements Serializable {
     @Column(name = "title")
     private String title;
 
+    public Department(String title) {
+        this.title = title;
+    }
+
+    public Department() {
+    }
+
     public String getTitle() {
         return title;
     }

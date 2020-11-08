@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
-public class EmployeeService extends BaseServiceImpl<Employee,EmployeeRepository> {
+public class EmployeeService extends BaseServiceImpl<Employee, EmployeeRepository> {
 
     @Autowired
     private DepartmentService departmentService;
@@ -27,7 +27,7 @@ public class EmployeeService extends BaseServiceImpl<Employee,EmployeeRepository
     private EmployeeRepository EmployeeRepository;
 
     @Override
-    protected EmployeeRepository getRepository(){
+    protected EmployeeRepository getRepository() {
         return EmployeeRepository;
     }
 

@@ -40,9 +40,9 @@ public class JobTitleController {
     }
 
     @GetMapping("/job-titles/{id}")
-    public JobTitleDto get(@PathVariable("id") Long id) throws NoSuchEntityFoundException  {
+    public JobTitleDto get(@PathVariable("id") Long id) throws NoSuchEntityFoundException {
         logger.info("Find job-title by id method started");
-        JobTitle entity = service.findOne(id).orElseThrow(()->new NoSuchEntityFoundException());
+        JobTitle entity = service.findOne(id).orElseThrow(() -> new NoSuchEntityFoundException());
         logger.info("Job-title found");
         return dtoMapper.mapEntityToDto(entity);
     }

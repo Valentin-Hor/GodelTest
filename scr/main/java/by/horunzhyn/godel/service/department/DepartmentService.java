@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class DepartmentService extends BaseServiceImpl<Department,DepartmentRepository> {
+public class DepartmentService extends BaseServiceImpl<Department, DepartmentRepository> {
 
     @Autowired
     private DepartmentRepository DepartmentRepository;
 
 
-    public Department update (Long id, String newTitle) {
+    public Department update(Long id, String newTitle) {
         Optional<Department> optional = findOne(id);
 
         if (!optional.isPresent()) {
@@ -29,7 +29,7 @@ public class DepartmentService extends BaseServiceImpl<Department,DepartmentRepo
 
 
     @Override
-    protected DepartmentRepository getRepository(){
+    protected DepartmentRepository getRepository() {
         return DepartmentRepository;
     }
 

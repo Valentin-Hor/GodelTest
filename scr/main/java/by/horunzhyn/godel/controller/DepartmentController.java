@@ -42,13 +42,13 @@ public class DepartmentController {
     public DepartmentDto get(@PathVariable("id") Long id) throws NoSuchEntityFoundException {
         logger.info("Find department by id method started");
 
-        Department entity = service.findOne(id).orElseThrow(()->new NoSuchEntityFoundException());
+        Department entity = service.findOne(id).orElseThrow(() -> new NoSuchEntityFoundException());
         logger.info("Department found");
         return dtoMapper.mapEntityToDto(entity);
     }
 
     @PostMapping("/departments")
-    public DepartmentDto create(@RequestBody DepartmentDto dto){
+    public DepartmentDto create(@RequestBody DepartmentDto dto) {
         logger.info("Create department method started");
         Department savedEntity = service.save(dtoMapper.mapDtoToEntity(dto));
 
@@ -58,32 +58,19 @@ public class DepartmentController {
 
     @PutMapping("/departments/{id}")
     public DepartmentDto update(@PathVariable("id") Long id,
-                                @RequestBody DepartmentDto dto){
+                                @RequestBody DepartmentDto dto) {
         logger.info("Update department by id method started");
-        Department updatedEntity = service.update(id,dto.getTitle());
+        Department updatedEntity = service.update(id, dto.getTitle());
         logger.info("Department updated");
         return dtoMapper.mapEntityToDto(updatedEntity);
     }
 
     @DeleteMapping("/departments/{id}")
-    public void delete(@PathVariable("id") Long id){
+    public void delete(@PathVariable("id") Long id) {
         logger.info("Delete department by id method started");
         service.delete(id);
         logger.info("Department deleted");
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

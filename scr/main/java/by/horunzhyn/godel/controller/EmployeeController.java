@@ -41,7 +41,7 @@ public class EmployeeController {
     @GetMapping("/employees/{id}")
     public EmployeeDto get(@PathVariable("id") Long id) throws NoSuchEntityFoundException {
         logger.info("Show employee by id method started");
-        Employee entity = service.findOne(id).orElseThrow(()-> new NoSuchEntityFoundException());
+        Employee entity = service.findOne(id).orElseThrow(() -> new NoSuchEntityFoundException());
         logger.info("Employee found");
         return dtoMapper.mapEntityToDto(entity);
     }

@@ -5,7 +5,7 @@ import by.horunzhyn.godel.entity.JobTitle;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JobTitleDtoMapper extends BaseDtoMapper<JobTitle,JobTitleDto> {
+public class JobTitleDtoMapper extends BaseDtoMapper<JobTitle, JobTitleDto> {
 
     @Override
     protected JobTitleDto createDto() {

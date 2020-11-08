@@ -34,7 +34,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers,
                                                                    HttpStatus status, WebRequest request) {
-        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND,ex);
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex);
         apiError.setErrorType(HttpStatus.NOT_FOUND.value());
         return new ResponseEntity<Object>(apiError, HttpStatus.NOT_FOUND);
     }

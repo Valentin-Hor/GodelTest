@@ -20,7 +20,7 @@ public class Application {
     }
 
     @Bean
-    public Docket swaggerConfiguration(){
+    public Docket swaggerConfiguration() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("by.horunzhyn.godel"))
@@ -30,13 +30,13 @@ public class Application {
 
     }
 
-    private ApiInfo apiDetails(){
+    private ApiInfo apiDetails() {
         return new ApiInfo(
                 "Godel Test API",
                 "Sample REST API for Employee Database",
                 "1.0",
                 "Free to use",
-                new springfox.documentation.service.Contact("Horunzhyn Valentin","",""),
+                new springfox.documentation.service.Contact("Horunzhyn Valentin", "", ""),
                 "API License",
                 "",
                 Collections.emptyList());

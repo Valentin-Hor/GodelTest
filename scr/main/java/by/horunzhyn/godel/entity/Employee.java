@@ -2,6 +2,8 @@ package by.horunzhyn.godel.entity;
 
 import by.horunzhyn.godel.dao.converter.GenderConverter;
 import by.horunzhyn.godel.data.Gender;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,10 +13,10 @@ import java.time.LocalDate;
 @Table(name = "employee")
 public class Employee extends BaseEntity implements Serializable {
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
 
     @ManyToOne
@@ -29,8 +31,21 @@ public class Employee extends BaseEntity implements Serializable {
     @Convert(converter = GenderConverter.class)
     private Gender gender;
 
-    @Column(name="date_of_birth")
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
+
+    public Employee() {
+
+    }
+
+    public Employee(String firstName, String lastName, Department department, JobTitle jobTitle, Gender gender, LocalDate dateOfBirth) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.department = department;
+        this.jobTitle = jobTitle;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+    }
 
     public String getFirstName() {
         return firstName;

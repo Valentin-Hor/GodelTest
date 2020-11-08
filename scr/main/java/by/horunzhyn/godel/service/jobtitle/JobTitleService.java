@@ -14,7 +14,7 @@ public class JobTitleService extends BaseServiceImpl<JobTitle, JobTitleRepositor
     @Autowired
     private JobTitleRepository jobTitleRepository;
 
-    public JobTitle update (Long id, String newTitle) {
+    public JobTitle update(Long id, String newTitle) {
         Optional<JobTitle> optional = findOne(id);
 
         if (!optional.isPresent()) {
@@ -27,8 +27,7 @@ public class JobTitleService extends BaseServiceImpl<JobTitle, JobTitleRepositor
     }
 
     @Override
-    protected JobTitleRepository getRepository()
-    {
+    protected JobTitleRepository getRepository() {
         return jobTitleRepository;
     }
 

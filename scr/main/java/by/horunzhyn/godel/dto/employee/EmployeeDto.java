@@ -1,7 +1,10 @@
 package by.horunzhyn.godel.dto.employee;
 
+import by.horunzhyn.godel.data.Gender;
 import by.horunzhyn.godel.dto.department.DepartmentDto;
 import by.horunzhyn.godel.dto.jobtitle.JobTitleDto;
+
+import java.time.LocalDate;
 
 public class EmployeeDto extends BaseEmployeeDto {
 
