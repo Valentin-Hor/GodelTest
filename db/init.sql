@@ -26,6 +26,40 @@ CREATE TABLE employee
     gender varchar(32),
     date_of_birth date
 );
+
+-- spring security part--
+
+create table role_table
+(
+    id   serial      not null
+        constraint role_table_pk
+        primary key,
+    name varchar(20) not null
+);
+
+alter table role_table
+    owner to godel_user;
+
+create table user_table
+(
+    id       serial not null
+        constraint user_table_pk
+        primary key,
+    login    varchar(50),
+    password varchar(500),
+    role_id  integer
+        constraint user_table_role_table_id_fk
+        references role_table
+);
+
+alter table user_table
+    owner to godel_user;
+
+create unique index user_table_login_uindex
+    on user_table (login);
+
+-- SET VALUES TO DATABASE--
+
 INSERT INTO department(title)
     VALUES ('Administration'),('Manufacture');
 
@@ -43,6 +77,9 @@ INSERT INTO employee(first_name, last_name, department_id, job_title_id, gender,
         ('Sergey','Platonov','2','7','MALE','14-03-1990'),
         ('Vasiliy','Korgan','2','7','MALE','21-12-1991'),
         ('Dmitry','Kulik','2','7','MALE','15-04-1970');
+
+INSERT INTO role_table(name) values ('ROLE_ADMIN');
+INSERT INTO role_table(name) values ('ROLE_USER');
 
 -- select employee.first_name,
 --     employee.last_name,
