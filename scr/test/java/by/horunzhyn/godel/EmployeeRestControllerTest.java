@@ -1,9 +1,6 @@
 package by.horunzhyn.godel;
 
 import by.horunzhyn.godel.data.Gender;
-import by.horunzhyn.godel.dto.employee.EmployeeDto;
-import by.horunzhyn.godel.dto.employee.EmployeeDtoMapper;
-import by.horunzhyn.godel.dto.employee.PersistEmployeeDto;
 import by.horunzhyn.godel.entity.Department;
 import by.horunzhyn.godel.entity.Employee;
 import by.horunzhyn.godel.entity.JobTitle;
@@ -11,20 +8,17 @@ import by.horunzhyn.godel.service.employee.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Optional;
-
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -32,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class EmployeeRestControllerTest {
+ class EmployeeRestControllerTest {
 
     @MockBean
     private EmployeeService employeeService;
@@ -43,15 +37,15 @@ public class EmployeeRestControllerTest {
 
 
     @Test
-    public void testGetAllEmployee() throws Exception {
+     void testGetAllEmployee() throws Exception {
         Department department = new Department("testDepartment");
         JobTitle jobTitle = new JobTitle("testJobTitle");
         Employee employee1 = new Employee("firstName", "lastName", department, jobTitle, Gender.MALE,
-                LocalDate.of(1980, 06, 06));
-        employee1.setId(1l);
+                LocalDate.of(1980, 6, 6));
+        employee1.setId(1L);
         Employee employee2 = new Employee("firstName2", "lastName2", department, jobTitle, Gender.FEMALE,
-                LocalDate.of(1981, 07, 07));
-        employee2.setId(2l);
+                LocalDate.of(1981, 7, 7));
+        employee2.setId(2L);
 
         doReturn(Lists.newArrayList(employee1, employee2)).when(employeeService).findAll();
 
@@ -77,14 +71,14 @@ public class EmployeeRestControllerTest {
     }
 
     @Test
-    public void testGetEmployeeById() throws Exception {
+     void testGetEmployeeById() throws Exception {
         Department department = new Department("testDepartment");
         JobTitle jobTitle = new JobTitle("testJobTitle");
         Employee employee = new Employee("firstName", "lastName", department, jobTitle, Gender.MALE,
-                LocalDate.of(1980, 06, 06));
-        employee.setId(1l);
+                LocalDate.of(1980, 6, 6));
+        employee.setId(1L);
 
-        doReturn(Optional.of(employee)).when(employeeService).findOne(1l);
+        doReturn(Optional.of(employee)).when(employeeService).findOne(1L);
 
         mockMvc.perform(get("/employees/{id}", 1))
                 .andExpect(status().isOk())
@@ -100,8 +94,8 @@ public class EmployeeRestControllerTest {
     }
 
     @Test
-    public void testGetEmployeeByIdNotFound() throws Exception{
-        doReturn(Optional.empty()).when(employeeService).findOne(1l);
+     void testGetEmployeeByIdNotFound() throws Exception{
+        doReturn(Optional.empty()).when(employeeService).findOne(1L);
 
         mockMvc.perform(get("/employees/{id}", 1))
                 .andExpect(status().isNotFound());
@@ -109,23 +103,26 @@ public class EmployeeRestControllerTest {
     }
 
     @Test
-    public void testCreateEmployee() throws Exception{
+     void testCreateEmployee() throws Exception{
         Department department = new Department("testDepartment");
-        department.setId(1l);
+        department.setId(1L);
         JobTitle jobTitle = new JobTitle("testJobTitle");
-        jobTitle.setId(1l);
+        jobTitle.setId(1L);
 
         Employee employeeToPost = new Employee("firstName","lastName",department,jobTitle,
-                Gender.MALE,LocalDate.of(1980,06,06));
+                Gender.MALE,LocalDate.of(1980,6,6));
         Employee employeeToReturn = new Employee("firstName", "lastName", department, jobTitle, Gender.MALE,
-                LocalDate.of(1980, 06, 06));
-        employeeToReturn.setId(1l);
+                LocalDate.of(1980, 6, 6));
+        employeeToReturn.setId(1L);
+        Employee employee = new Employee();
+        employee.setFirstName("firstName");
+        employee.setLastName("lastName");
 
-        doReturn(employeeToReturn).when(employeeService).save(employeeToPost);
+        doReturn(employee).when(employeeService).save(any());
 
         mockMvc.perform(post("/employees")
         .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(employeeToPost)))
+                .content(asJsonString(employee)))
 //        .content("{\n" +
 //                "    \"firstName\": \"firstName\",\n" +
 //                "    \"lastName\": \"lastName\",\n" +
@@ -145,7 +142,7 @@ public class EmployeeRestControllerTest {
                 .andExpect(jsonPath("$.jobTitle.title", is("testJobTitle")));
     }
 
-     static String asJsonString(final Object obj) {
+     private static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
         } catch (Exception e) {
